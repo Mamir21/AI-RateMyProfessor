@@ -1,0 +1,48 @@
+nav {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.logo {
+  width: 120px;
+}
+
+nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 5px 20px;
+  font-size: 18px;
+}
+
+.nav-link {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition:color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #7582f7;
+}
+
+.btn:hover {
+  border-top-right-radius: 30px;
+}
+
+nav.scrolled {
+  background-color: #0b243d; 
+}

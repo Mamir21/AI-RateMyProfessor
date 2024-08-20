@@ -1,0 +1,37 @@
+.homepage-container {
+    height: 100vh;
+    background-image: url('../public/images/home.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    text-align: center;
+  }
+
+  .content {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    max-width: 600px;
+    color: #ffffff;
+
+  }
+  
+  .content h1 {
+    font-size: 90px;
+    text-shadow: 3px 3px #5872e7;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  .content p {
+    margin: 14px 10px;
+    font-size: 24px;
+    color: #ffffff;
+    text-shadow: 1px 2px #5861e7;
+    animation: fadeIn 1.5s ease-in;
+  } 
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
