@@ -81,7 +81,7 @@ export default function ChatBot() {
             >
               <div className={`message-sender avatar ${message.role}`}>
               {message.role === 'user' ? (
-                  <img alt="avatar" width={40} height={40} src="../images/gojo1.gif" />
+                  <img alt="avatar" width={40} height={40} src="../images/goku1.gif" />
                 ) : (
                   <img alt="avatar" width={40} height={40} src="../images/ai.png" />
                 )}

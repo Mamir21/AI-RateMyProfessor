@@ -35,7 +35,7 @@ export default function Login() {
     } catch (error) {
       alert('Error signing in with Google: ' + error.message);
     }
-  };
+  }
 
   return (
     <div className='login'>
@@ -108,5 +108,5 @@ export default function Login() {
         </Typography>
       </Box>
     </div>
-  );
+  )
 }

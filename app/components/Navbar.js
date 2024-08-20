@@ -18,13 +18,13 @@ export default function Navbar() {
       } else {
         setScrolled(false);
       }
-    };
+    }
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    }
+  }, [])
 
   const handleLogout = async () => {
     try {
@@ -36,10 +36,9 @@ export default function Navbar() {
 
   }
   
-
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
-      <img src='/images/logo.png' className="logo" />
+      <img src='/images/sage1.png' className="logo" />
       <ul>
         <li><NavLink href="/home" title="Home" /></li>
         <li><NavLink href="/bot" title="Chatterbot" /></li>
