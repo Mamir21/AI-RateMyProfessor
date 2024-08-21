@@ -1,12 +1,26 @@
 import axios from 'axios';
+import { queryProfessorData } from './pinecone';
 
-export const queryLLaMA = async (messages) => {
+export const generateResponseWithRAG = async (messages) => {
   try {
+    // Retrieve relevant professor data from Pinecone based on the user's query
+    const pineconeContext = await queryProfessorData(messages[0].content);
+
+    // Construct a detailed prompt with the retrieved metadata
+    const enhancedMessages = [
+      ...messages,
+      {
+        role: "system",
+        content: `Context: ${pineconeContext.map(context => `${context.name} from ${context.school} in the ${context.department} department. Rating: ${context.rating}, Difficulty: ${context.difficulty}, Would take again: ${context.would_take_again}%`).join(' ')}`
+      }
+    ];
+
+    // Query LLaMA with the enhanced context
     const response = await axios.post(
       'https://api.groq.com/openai/v1/chat/completions',
       {
         model: 'llama3-8b-8192',
-        messages,  
+        messages: enhancedMessages,
         temperature: 1.5,
         max_tokens: 1024,
         top_p: 1,
@@ -19,19 +33,11 @@ export const queryLLaMA = async (messages) => {
           'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GROQ_API_KEY}`,
         },
       }
-    )
+    );
+
     return response.data;
   } catch (error) {
-    if (error.response) {
-      console.error('Error response data:', error.response.data);
-      console.error('Error response status:', error.response.status);
-      console.error('Error response headers:', error.response.headers);
-    } else if (error.request) {
-      console.error('Error request data:', error.request);
-    } else {
-      console.error('Error message:', error.message);
-    }
-    console.error('Error config:', error.config);
-    throw new Error('Error querying LLaMA API');
+    console.error('🔴 Error querying LLaMA with RAG:', error);
+    throw new Error('Error querying LLaMA API with RAG');
   }
-}
+};

@@ -11,12 +11,11 @@ export default function ChatBot() {
   useEffect(() => {
     const initialSystemMessage = {
       role: 'system',
-      content: "Hello! I’m your friendly robot assistant, ready to help with questions. Whether you need info, advice, or just a chat," +
-      " I’m here for you. Ask me anything, and let’s make your experience great!"
-    }
-    
+      content: "Hello! I'm your academic assistant. You can ask me about professors from different colleges, including their ratings, departments, and difficulty levels. For example, you can ask me 'Who is the best science professor at Harvard?' or 'Tell me about Professor John Doe from MIT'. I'll do my best to provide accurate and up-to-date information about college professors and courses!"
+    };
+
     setChatHistory([initialSystemMessage]);
-  }, [])
+  }, []);
 
   const handleUserInput = async () => {
     if (userInput.trim() === '') return;
