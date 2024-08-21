@@ -1,4 +1,5 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
 import { signInWithGoogle } from '../services/auth';
 import { Box, Typography } from '@mui/material';
@@ -40,7 +41,7 @@ export default function Login() {
   return (
     <div className='login'>
       <nav>
-      <img src='/images/logo.png' className="logo" /> 
+      <img src='/images/wlogo.png' className="logo" /> 
       <Box
         position="absolute"
         top="30px"
@@ -55,7 +56,7 @@ export default function Login() {
           animation: 'buttonGlow 2s infinite',
           cursor: 'pointer', 
           '&:hover': {
-            backgroundColor: '#3a4ecf', 
+            backgroundColor: '#317880', 
             transition: 'background-color 0.3s',
           },
         }}
@@ -73,8 +74,8 @@ export default function Login() {
         gap={2}
       >
         <Typography
-          fontSize="40px"
-          color="lightblue"
+          fontSize="70px"
+          color="white"
           position="relative"
           sx={{
             '@keyframes fadeInUp': {
@@ -82,9 +83,9 @@ export default function Login() {
               '100%': { opacity: 1, transform: 'translateY(0)' },
             },
             '@keyframes textGlow': {
-              '0%': { textShadow: '0 0 5px lightblue' },
-              '50%': { textShadow: '0 0 20px lightblue' },
-              '100%': { textShadow: '0 0 5px lightblue' },
+              '0%': { textShadow: '0 0 5px #317880' },
+              '50%': { textShadow: '0 0 20px #317880' },
+              '100%': { textShadow: '0 0 5px #317880' },
             },
             animation: 'fadeInUp 2s ease-out, textGlow 2s infinite', 
           }}
@@ -93,18 +94,18 @@ export default function Login() {
         </Typography>
         <Typography 
           position="relative" 
-          fontSize="75px" 
-          color="lightblue"
+          fontSize="70px" 
+          color="white"
           sx={{
             '@keyframes textGlow': {
-              '0%': { textShadow: '0 0 5px lightblue' },
-              '50%': { textShadow: '0 0 20px lightblue' },
-              '100%': { textShadow: '0 0 5px lightblue' },
+              '0%': { textShadow: '0 0 5px #317880' },
+              '50%': { textShadow: '0 0 20px #317880' },
+              '100%': { textShadow: '0 0 5px #317880' },
             },
             animation: 'textGlow 2s infinite',
           }}
         >
-          Chatterbot
+          Sage.AI
         </Typography>
       </Box>
     </div>
