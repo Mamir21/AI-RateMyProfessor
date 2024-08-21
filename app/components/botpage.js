@@ -12,7 +12,7 @@ export default function ChatBot() {
     const initialSystemMessage = {
       role: 'system',
       content: "Hello! I’m your friendly robot assistant, ready to help with questions. Whether you need info, advice, or just a chat," +
-      " I’m here for you. Ask me anything, and let’s make your experience great!"
+      " I’m here for you.  Ask me anything about your professors, and let’s make your experience great!"
     }
     
     setChatHistory([initialSystemMessage]);

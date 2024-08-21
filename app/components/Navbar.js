@@ -2,11 +2,10 @@
 
 import React from 'react';
 import NavLink from './NavLink';
-import '../navbar.css';
 import { useState, useEffect } from 'react';
 import { logOut } from '../services/auth';
 import { useRouter } from 'next/navigation'; 
-
+import '../navbar.css';
 
 export default function Navbar() {
   const router = useRouter(); 
@@ -34,7 +33,6 @@ export default function Navbar() {
     } catch (error) {
       console.error('Error logging out:', error);
     }
-
   }
 
   const handleLogoClick = () => {

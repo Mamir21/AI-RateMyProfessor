@@ -15,7 +15,7 @@
   padding: 50px;
   background: linear-gradient(to right, #d46f6f, #317880);
   border: 3px solid #ffffff;
-  box-shadow: 0px 0px 15px rgba(193, 173, 173, 0.1);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
   border-radius: 70px;
   display: flex;
   flex-direction: column;
@@ -44,9 +44,9 @@
     box-shadow: 0 0 5px #ffffff;
   }
   50% {
-    box-shadow: 0 0 20px #dfe0ea;
+    box-shadow: 0 0 20px #ffffff;
   }
   100% {
-    box-shadow: 0 0 5px #e2e3e5;
+    box-shadow: 0 0 5px #ffffff;
   }
 }

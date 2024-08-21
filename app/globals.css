@@ -32,13 +32,12 @@
     box-shadow: 0 0 5px #ffffff;
   }
   50% {
-    box-shadow: 0 0 20px #dfe0ea;
+    box-shadow: 0 0 20px #ffffff;
   }
   100% {
-    box-shadow: 0 0 5px #e2e3e5;
+    box-shadow: 0 0 5px #ffffff;
   }
 }
-
 
 .login {
   background: linear-gradient(to left, #317880, #d46f6f);
