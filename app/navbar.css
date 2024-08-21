@@ -50,6 +50,9 @@ nav ul li {
 nav.scrolled {
   background-color: #0b243d; 
 }
+.small-ai {
+  font-size: 0.7em;  
+}
 
 @keyframes buttonGlow {
   0% {
