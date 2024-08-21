@@ -78,8 +78,8 @@
   font-size: 1rem;
   outline: none;
   border: none;
-  box-shadow: 0 0 24px #2372cc;
-  background-color: #2372cc;
+  box-shadow: 0 0 24px #24f7e5;
+  background-color: #24d4b7;
   color: #fff;
   font-weight: 900;
   margin-left: 10px;
@@ -92,7 +92,7 @@
 
 .send-button:hover {
   background-color: #3cd8ff;
-  box-shadow: 0 0 30px #4d3ce2;
+  box-shadow: 0 0 30px #30a6b6;
 }
 
 .chat-form {

@@ -1,4 +1,5 @@
-'use client'; 
+'use client';
+
 import React from 'react';
 import NavLink from './NavLink';
 import '../navbar.css';
@@ -35,13 +36,21 @@ export default function Navbar() {
     }
 
   }
-  
+
+  const handleLogoClick = () => {
+    router.push('/home');
+  }
+
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
-      <img src='/images/sage1.png' className="logo" />
+      <img src='/images/wlogo.png' className="logo" onClick={handleLogoClick} alt="Logo"/>
       <ul>
         <li><NavLink href="/home" title="Home" /></li>
-        <li><NavLink href="/bot" title="Chatterbot" /></li>
+        <li>
+        <a href="/bot" class="nav-link">
+          Sage.<span class="small-ai">AI</span>
+        </a>
+      </li>
       </ul>
       <div>
         <a className='btn' onClick={handleLogout}>Log out</a>
