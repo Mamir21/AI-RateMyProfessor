@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+.homepage-container {
+  background: linear-gradient(to right, #317880, #d46f6f);
+}
+
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -37,5 +41,5 @@
 
 
 .login {
-  background-image: url('../public/images/home.jpeg');
+  background: linear-gradient(to left, #317880, #d46f6f);
 }

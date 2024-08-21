@@ -6,12 +6,10 @@ import ChatBot from '../components/botpage';
 export default function Bot() {
   return (
     <ProtectedRoute>
-
       <Navbar />
       <>
       <ChatBot />
       </>
-
       </ProtectedRoute>
   )
 }
