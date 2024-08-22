@@ -5,8 +5,16 @@
   min-height: 100vh;
   font-size: large;
   padding: 20px;
-  background: linear-gradient(to right, #317880, #d46f6f);
   color: whitesmoke;
+  background: 
+    linear-gradient(to right, #317880, #d46f6f),  
+    repeating-linear-gradient(45deg,
+        rgba(255, 255, 255, 0.2) 0, 
+        rgba(255, 255, 255, 0.2) 50px,
+        rgba(255, 255, 255, 0) 50px, 
+        rgba(255, 255, 255, 0) 100px);
+  background-size: 200px 200px, cover;
+  background-blend-mode: overlay;
 }
 
 .welcome-section {

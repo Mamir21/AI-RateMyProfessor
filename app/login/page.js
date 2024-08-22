@@ -91,7 +91,7 @@ export default function Login() {
             animation: 'fadeInUp 2s ease-out, textGlow 2s infinite', 
           }}
         >
-          WELCOME TO SAGE
+          WELCOME TO SAGE!
         </Typography>
       </Box>
     </div>
