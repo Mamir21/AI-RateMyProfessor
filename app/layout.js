@@ -4,7 +4,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI-RateMyProf",
+  title: "Sage.AI",
   description: "AI-RateMyProf is a web application that uses AI to rate professors based on student reviews.",
 }
 

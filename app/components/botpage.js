@@ -91,7 +91,7 @@ export default function ChatBot() {
               {message.role === 'user' ? (
                   <img alt="avatar" width={40} height={40} src="../images/goku1.gif" />
                 ) : (
-                  <img alt="avatar" width={40} height={40} src="../images/ai.png" />
+                  <img alt="avatar" width={40} height={40} src="../images/unnamed.webp" />
                 )}
               </div>
               <div className={`message-content ${message.role}`} style={{ width: '100%', marginLeft: '16px' }}>
@@ -107,7 +107,7 @@ export default function ChatBot() {
         <div className="chat-form">
           <input
             type="text"
-            placeholder="Message Chatterbot"
+            placeholder="Message Sage"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={handleKeyDown}

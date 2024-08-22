@@ -1,7 +1,7 @@
 .chat-container {
-  background-image: url('../public/images/home.jpeg');
+  background: linear-gradient(to right, #d46f6f, #317880);
   margin: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -68,7 +68,7 @@
 }
 
 .ai-chat > .avatar {
-  box-shadow: 0 0 24px #7d24eb9e;
+  box-shadow: 0 0 24px #bcf1d9;
 }
 
 .send-button {
@@ -78,8 +78,8 @@
   font-size: 1rem;
   outline: none;
   border: none;
-  box-shadow: 0 0 24px #2372cc;
-  background-color: #2372cc;
+  box-shadow: 0 0 24px #24f7e5;
+  background-color: #24d4b7;
   color: #fff;
   font-weight: 900;
   margin-left: 10px;
@@ -91,8 +91,8 @@
 }
 
 .send-button:hover {
-  background-color: #3cd8ff;
-  box-shadow: 0 0 30px #4d3ce2;
+  background-color: #34badb;
+  box-shadow: 0 0 30px #73d8d0;
 }
 
 .chat-form {
@@ -168,17 +168,11 @@
 }
 
 .input-area button:hover {
-  background-color: #3182ce;
+  background-color: #50e6fa;
 }
 
 .loading {
   background-color: #4299e1;
   color: white;
   animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
 }

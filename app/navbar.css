@@ -1,5 +1,5 @@
 nav {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +12,11 @@ nav {
 }
 
 .logo {
-  width: 120px;
+  width: 130px;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 nav ul {
@@ -32,11 +36,11 @@ nav ul li {
   color: white;
   cursor: pointer;
   text-decoration: none;
-  transition:color 0.3s ease;
+  transition:color 0.9s ease;
 }
 
 .nav-link:hover {
-  color: #7582f7;
+  color: #86f5dd;
 }
 
 .btn:hover {
@@ -45,4 +49,19 @@ nav ul li {
 
 nav.scrolled {
   background-color: #0b243d; 
+}
+.small-ai {
+  font-size: 0.7em;  
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 0 0 5px #ffffff;
+  }
+  50% {
+    box-shadow: 0 0 20px #ffffff;
+  }
+  100% {
+    box-shadow: 0 0 5px #ffffff;
+  }
 }

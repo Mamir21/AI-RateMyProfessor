@@ -1,11 +1,12 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
 import { signInWithGoogle } from '../services/auth';
 import { Box, Typography } from '@mui/material';
 import { auth } from '@/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import '../navbar.css';
 import { useEffect } from 'react';
+import '../navbar.css';
 
 export default function Login() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function Login() {
   return (
     <div className='login'>
       <nav>
-      <img src='/images/logo.png' className="logo" /> 
+      <img src='/images/wlogo.png' className="logo" /> 
       <Box
         position="absolute"
         top="30px"
@@ -48,14 +49,14 @@ export default function Login() {
         borderRadius="50%"
         sx={{
           '@keyframes buttonGlow': {
-            '0%': { boxShadow: '0 0 5px #4b5cf3' },
-            '50%': { boxShadow: '0 0 20px #4b5cf3' },
-            '100%': { boxShadow: '0 0 5px #4b5cf3' },
+            '0%': { boxShadow: '0 0 5px white' },
+            '50%': { boxShadow: '0 0 20px white' },
+            '100%': { boxShadow: '0 0 5px white' },
           },
           animation: 'buttonGlow 2s infinite',
           cursor: 'pointer', 
           '&:hover': {
-            backgroundColor: '#3a4ecf', 
+            backgroundColor: '#317880', 
             transition: 'background-color 0.3s',
           },
         }}
@@ -66,15 +67,16 @@ export default function Login() {
       <Box
         width="100vw" 
         height="100vh" 
-        display="flex" 
+        display="flex"
         flexDirection="column"
         justifyContent="center" 
         alignItems="center" 
         gap={2}
       >
         <Typography
-          fontSize="40px"
-          color="lightblue"
+         fontFamily="cursive"
+          fontSize="70px"
+          color="white"
           position="relative"
           sx={{
             '@keyframes fadeInUp': {
@@ -82,29 +84,14 @@ export default function Login() {
               '100%': { opacity: 1, transform: 'translateY(0)' },
             },
             '@keyframes textGlow': {
-              '0%': { textShadow: '0 0 5px lightblue' },
-              '50%': { textShadow: '0 0 20px lightblue' },
-              '100%': { textShadow: '0 0 5px lightblue' },
+              '0%': { textShadow: '0 0 5px white' },
+              '50%': { textShadow: '0 0 20px white' },
+              '100%': { textShadow: '0 0 5px white' },
             },
             animation: 'fadeInUp 2s ease-out, textGlow 2s infinite', 
           }}
         >
-          Welcome To
-        </Typography>
-        <Typography 
-          position="relative" 
-          fontSize="75px" 
-          color="lightblue"
-          sx={{
-            '@keyframes textGlow': {
-              '0%': { textShadow: '0 0 5px lightblue' },
-              '50%': { textShadow: '0 0 20px lightblue' },
-              '100%': { textShadow: '0 0 5px lightblue' },
-            },
-            animation: 'textGlow 2s infinite',
-          }}
-        >
-          Chatterbot
+          WELCOME TO SAGE!
         </Typography>
       </Box>
     </div>

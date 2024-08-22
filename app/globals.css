@@ -4,12 +4,24 @@
   margin: 0;
 }
 
+.homepage-container {
+  background: 
+  linear-gradient(to right, #317880, #d46f6f),   
+  repeating-linear-gradient(45deg, 
+      rgba(255, 255, 255, 0.2) 0, 
+      rgba(255, 255, 255, 0.2) 10px,
+      rgba(255, 255, 255, 0) 10px, 
+      rgba(255, 255, 255, 0) 20px);
+  background-size: 20px 20px, cover;
+  background-blend-mode: overlay;
+}
+
 .btn {
   display: inline-block;
   text-decoration: none;
   padding: 14px 40px;
   color: #fff;
-  background-image: linear-gradient(45deg, #4b5cf3, #1a1dd3);
+  background: linear-gradient(to right, #317880, #d46f6f);
   font-size: 16px;
   border-radius: 30px;
   border-top-right-radius: 0;
@@ -19,23 +31,29 @@
 }
 
 .btn:hover {
-  background-color: #3a4ecf;
+  background-color: #f8f8f8;
   transition: background-color 0.3s;
 }
 
 @keyframes buttonGlow {
   0% {
-    box-shadow: 0 0 5px #4b5cf3;
+    box-shadow: 0 0 5px #ffffff;
   }
   50% {
-    box-shadow: 0 0 20px #4b5cf3;
+    box-shadow: 0 0 20px #ffffff;
   }
   100% {
-    box-shadow: 0 0 5px #4b5cf3;
+    box-shadow: 0 0 5px #ffffff;
   }
 }
 
-
 .login {
-  background-image: url('../public/images/home.jpeg');
-}
+  background: 
+  linear-gradient(to right, #317880, #d46f6f),  
+  repeating-linear-gradient(60deg, 
+      rgba(255, 255, 255, 0.2) 0, 
+      rgba(255, 255, 255, 0.2) 50px,
+      rgba(255, 255, 255, 0) 50px, 
+      rgba(255, 255, 255, 0) 50px);
+  background-size: 200px 200px, cover;
+  background-blend-mode: overlay;}
