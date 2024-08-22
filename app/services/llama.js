@@ -1,37 +1,75 @@
+import { queryProfessorData } from './pinecone';
 import axios from 'axios';
 
-export const queryLLaMA = async (messages) => {
+// Generate a response using LLaMA with context from Pinecone
+export const generateResponseWithRAG = async (messages) => {
   try {
-    const response = await axios.post(
-      'https://api.groq.com/openai/v1/chat/completions',
-      {
+    // Extract the query text from the messages
+    const queryText = messages[0].content;
+
+    // Assume queryText is in the format "Professor Name, School Name"
+    const [professorName, schoolName] = queryText.split(',').map(s => s.trim());
+
+    // Check if either schoolName or professorName is missing
+    if (!schoolName || !professorName) {
+      console.warn('🟡 Missing required parameters: schoolName or professorName');
+      return {
+        response: 'Please provide both the professor name and the school name.',
+      };
+    }
+
+    // Retrieve relevant context from Pinecone
+    const pineconeContext = await queryProfessorData({ schoolName, professorName });
+    console.log('Pinecone Context:', pineconeContext);
+
+    // If context is found, construct a detailed prompt for LLaMA
+    if (pineconeContext) {
+      const enhancedMessages = [
+        ...messages,
+        {
+          role: 'system',
+          content: `Context: ${pineconeContext.map(context => `${context.name} from ${context.school} in the ${context.department} department. Rating: ${context.rating}, Difficulty: ${context.difficulty}, Would take again: ${context.would_take_again}%`).join(' ')}`,
+        }
+      ];
+
+      console.log('Enhanced Messages for LLaMA:', enhancedMessages);
+
+      // Query LLaMA to generate a response based on the enhanced context
+      const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
         model: 'llama3-8b-8192',
-        messages,  
+        messages: enhancedMessages,
         temperature: 1.5,
         max_tokens: 1024,
         top_p: 1,
-        stream: false,
-        stop: null
-      },
-      {
+      }, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GROQ_API_KEY}`,
         },
-      }
-    )
-    return response.data;
-  } catch (error) {
-    if (error.response) {
-      console.error('Error response data:', error.response.data);
-      console.error('Error response status:', error.response.status);
-      console.error('Error response headers:', error.response.headers);
-    } else if (error.request) {
-      console.error('Error request data:', error.request);
+      });
+
+      return response.data;
     } else {
-      console.error('Error message:', error.message);
+      console.warn('🟡 No context found in Pinecone. Using LLaMA without additional context.');
+      
+      // Query LLaMA without additional context
+      const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+        model: 'llama3-8b-8192',
+        messages,
+        temperature: 1.5,
+        max_tokens: 1024,
+        top_p: 1,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GROQ_API_KEY}`,
+        },
+      });
+
+      return response.data;
     }
-    console.error('Error config:', error.config);
-    throw new Error('Error querying LLaMA API');
+  } catch (error) {
+    console.error('🔴 Error querying LLaMA API with RAG:', error.message);
+    throw new Error('Failed to query LLaMA API with RAG');
   }
-}
+};

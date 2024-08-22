@@ -11,22 +11,21 @@ export default function ChatBot() {
   useEffect(() => {
     const initialSystemMessage = {
       role: 'system',
-      content: "Hello! I’m your friendly robot assistant, ready to help with questions. Whether you need info, advice, or just a chat," +
-      " I’m here for you.  Ask me anything about your professors, and let’s make your experience great!"
-    }
-    
+      content: "Hello! I'm your academic assistant. You can ask me about professors from different colleges, including their ratings, departments, and difficulty levels. For example, you can ask me 'Who is the best science professor at Harvard?' or 'Tell me about Professor John Doe from MIT'. I'll do my best to provide accurate and up-to-date information about college professors and courses!"
+    };
+
     setChatHistory([initialSystemMessage]);
-  }, [])
+  }, []);
 
   const handleUserInput = async () => {
     if (userInput.trim() === '') return;
-
+  
     setIsLoading(true);
-
+  
     let updatedChatHistory = [...chatHistory, { role: 'user', content: userInput }];
     
     setChatHistory(updatedChatHistory);
-
+  
     try {
       const response = await fetch('/api/bot', {
         method: 'POST',
@@ -35,32 +34,41 @@ export default function ChatBot() {
         },
         body: JSON.stringify({ messages: updatedChatHistory }),  
       })
-
+  
       const data = await response.json();
-
-      if (data.choices && data.choices[0] && data.choices[0].message) {
-        setChatHistory((prevChat) => [
-          ...prevChat,
-          { role: 'assistant', content: data.choices[0].message.content },
-        ])
+  
+      if (response.ok) {
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          setChatHistory((prevChat) => [
+            ...prevChat,
+            { role: 'assistant', content: data.choices[0].message.content },
+          ]);
+        } else {
+          console.error('Unexpected API response structure:', data);
+          setChatHistory((prevChat) => [
+            ...prevChat,
+            { role: 'assistant', content: 'Error: Unexpected response from the API' },
+          ]);
+        }
       } else {
-        console.error('Unexpected API response structure:', data);
+        console.error('API error:', data.error);
         setChatHistory((prevChat) => [
           ...prevChat,
-          { role: 'assistant', content: 'Error: Unexpected response from the API' },
-        ])
+          { role: 'assistant', content: `Error: ${data.error}` },
+        ]);
       }
     } catch (error) {
       console.error('Error querying LLaMA API:', error);
       setChatHistory((prevChat) => [
         ...prevChat,
         { role: 'assistant', content: 'Error querying LLaMA API' },
-      ])
+      ]);
     } finally {
       setUserInput('');
       setIsLoading(false);
     }
   }
+  
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
