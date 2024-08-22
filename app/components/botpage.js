@@ -19,13 +19,13 @@ export default function ChatBot() {
 
   const handleUserInput = async () => {
     if (userInput.trim() === '') return;
-
+  
     setIsLoading(true);
-
+  
     let updatedChatHistory = [...chatHistory, { role: 'user', content: userInput }];
     
     setChatHistory(updatedChatHistory);
-
+  
     try {
       const response = await fetch('/api/bot', {
         method: 'POST',
@@ -34,32 +34,41 @@ export default function ChatBot() {
         },
         body: JSON.stringify({ messages: updatedChatHistory }),  
       })
-
+  
       const data = await response.json();
-
-      if (data.choices && data.choices[0] && data.choices[0].message) {
-        setChatHistory((prevChat) => [
-          ...prevChat,
-          { role: 'assistant', content: data.choices[0].message.content },
-        ])
+  
+      if (response.ok) {
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+          setChatHistory((prevChat) => [
+            ...prevChat,
+            { role: 'assistant', content: data.choices[0].message.content },
+          ]);
+        } else {
+          console.error('Unexpected API response structure:', data);
+          setChatHistory((prevChat) => [
+            ...prevChat,
+            { role: 'assistant', content: 'Error: Unexpected response from the API' },
+          ]);
+        }
       } else {
-        console.error('Unexpected API response structure:', data);
+        console.error('API error:', data.error);
         setChatHistory((prevChat) => [
           ...prevChat,
-          { role: 'assistant', content: 'Error: Unexpected response from the API' },
-        ])
+          { role: 'assistant', content: `Error: ${data.error}` },
+        ]);
       }
     } catch (error) {
       console.error('Error querying LLaMA API:', error);
       setChatHistory((prevChat) => [
         ...prevChat,
         { role: 'assistant', content: 'Error querying LLaMA API' },
-      ])
+      ]);
     } finally {
       setUserInput('');
       setIsLoading(false);
     }
   }
+  
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
