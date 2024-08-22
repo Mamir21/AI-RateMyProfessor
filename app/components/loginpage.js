@@ -6,6 +6,7 @@ import { Box, Typography } from '@mui/material';
 import { auth } from '@/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
+import '../navbar.css';
 
 export default function Login() {
   const router = useRouter();
