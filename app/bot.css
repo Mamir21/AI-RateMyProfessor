@@ -1,7 +1,7 @@
 .chat-container {
   background: linear-gradient(to right, #d46f6f, #317880);
   margin: 0;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'comic sans ms';
   min-height: 100vh;
   display: flex;
   flex-direction: column;
