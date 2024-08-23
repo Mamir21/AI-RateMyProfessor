@@ -1,13 +1,31 @@
 import ratemyprofessor
 from sentence_transformers import SentenceTransformer
 import json
+import sys
+import warnings
+from transformers import logging as transformers_logging
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
+# Suppress the specific FutureWarning related to `clean_up_tokenization_spaces`
+warnings.filterwarnings("ignore", category=FutureWarning, module="transformers.tokenization_utils_base")
+transformers_logging.set_verbosity_error()
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-def fetchProfessorData(schoolName, professorName):
-    professor = ratemyprofessor.get_professor_by_school_and_name(
-        ratemyprofessor.get_school_by_name(schoolName), professorName)
-    if professor is not None:
+def fetch_professor_data(schoolName, professorName):
+    try:
+        school = ratemyprofessor.get_school_by_name(schoolName)
+        if not school:
+            return {"error": f"School '{schoolName}' not found."}
+
+        professor = ratemyprofessor.get_professor_by_school_and_name(school, professorName)
+        if not professor:
+            return {"error": f"Professor '{professorName}' not found at '{schoolName}'."}
+
         professorData = {
             "id": f"{professor.school.name}-{professor.name}",
             "name": professor.name,
@@ -26,10 +44,27 @@ def fetchProfessorData(schoolName, professorName):
         embedding = model.encode(text).tolist()  # Convert embedding to list to be JSON serializable
 
         return {"professorData": professorData, "embedding": embedding}
-    return None
+    except Exception as e:
+        logger.error(f"Error in fetching professor data: {str(e)}")
+        return {"error": str(e)}
 
 if __name__ == "__main__":
-    import sys
+    if len(sys.argv) != 3:
+        # Print error as JSON to stderr, ensuring it's handled correctly
+        sys.stderr.write(json.dumps({"error": "Usage: script.py <schoolName> <professorName>"}))
+        sys.exit(1)
+
     schoolName = sys.argv[1]
     professorName = sys.argv[2]
-    print(fetchProfessorData(schoolName, professorName))
+    
+    # Fetch the professor data
+    result = fetch_professor_data(schoolName, professorName)
+
+    # Ensure all output is valid JSON
+    try:
+        print(json.dumps(result))
+    except TypeError as e:
+        # Handle any serialization issues
+        logger.error(f"Failed to serialize result: {str(e)}")
+        sys.stderr.write(json.dumps({"error": "Failed to serialize result: " + str(e)}))
+        sys.exit(1)
