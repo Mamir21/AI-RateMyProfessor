@@ -33,10 +33,10 @@ export default function ChatBot() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ messages: updatedChatHistory }),  
-      })
+      });
   
       const data = await response.json();
-  
+
       if (response.ok) {
         if (data.choices && data.choices[0] && data.choices[0].message) {
           setChatHistory((prevChat) => [
@@ -44,14 +44,14 @@ export default function ChatBot() {
             { role: 'assistant', content: data.choices[0].message.content },
           ]);
         } else {
-          console.error('Unexpected API response structure:', data);
+          console.error('Unexpected API response structure:', data, 'Response:', response);
           setChatHistory((prevChat) => [
             ...prevChat,
             { role: 'assistant', content: 'Error: Unexpected response from the API' },
           ]);
         }
       } else {
-        console.error('API error:', data.error);
+        console.error('API error:', data.error, 'Response:', response);
         setChatHistory((prevChat) => [
           ...prevChat,
           { role: 'assistant', content: `Error: ${data.error}` },
@@ -68,7 +68,6 @@ export default function ChatBot() {
       setIsLoading(false);
     }
   }
-  
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
