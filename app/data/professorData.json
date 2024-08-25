@@ -1,0 +1,72 @@
+[
+  {
+      "id": "professor_1",
+      "name": "John Doe",
+      "department": "Computer Science",
+      "school": "Harvard University",
+      "rating": 4.7,
+      "difficulty": 3.5,
+      "num_ratings": 120,
+      "would_take_again": 85
+  },
+  {
+      "id": "professor_2",
+      "name": "Jane Smith",
+      "department": "Physics",
+      "school": "MIT",
+      "rating": 4.9,
+      "difficulty": 4.2,
+      "num_ratings": 95,
+      "would_take_again": 92
+  },
+  {
+      "id": "professor_3",
+      "name": "Alice Johnson",
+      "department": "Mathematics",
+      "school": "Stanford University",
+      "rating": 4.5,
+      "difficulty": 3.2,
+      "num_ratings": 120,
+      "would_take_again": 85
+  },
+  {
+      "id": "professor_4",
+      "name": "Michael Brown",
+      "department": "Biology",
+      "school": "University of California, Berkeley",
+      "rating": 4.6,
+      "difficulty": 3.7,
+      "num_ratings": 110,
+      "would_take_again": 87
+  },
+  {
+      "id": "professor_5",
+      "name": "Sara Lee",
+      "department": "Chemistry",
+      "school": "Yale University",
+      "rating": 4.8,
+      "difficulty": 3.9,
+      "num_ratings": 140,
+      "would_take_again": 89
+  },
+  {
+      "id": "professor_6",
+      "name": "David Thompson",
+      "department": "Engineering",
+      "school": "Massachusetts Institute of Technology",
+      "rating": 4.3,
+      "difficulty": 4.0,
+      "num_ratings": 130,
+      "would_take_again": 84
+  },
+  {
+      "id": "professor_7",
+      "name": "Emily White",
+      "department": "Psychology",
+      "school": "Stanford University",
+      "rating": 4.9,
+      "difficulty": 3.1,
+      "num_ratings": 95,
+      "would_take_again": 93
+  }
+]

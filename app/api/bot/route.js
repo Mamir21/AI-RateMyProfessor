@@ -1,18 +1,24 @@
-import { generateResponseWithRAG } from '../../services/llama.js';
+import { generateResponseWithRAG } from '../../services/llama';
 
 export async function POST(req) {
   try {
     const { messages } = await req.json();
-    const data = await generateResponseWithRAG(messages);
 
-    if (!data || !data.choices || !data.choices[0] || !data.choices[0].message) {
-      console.error('🔴 Unexpected response structure:', data);
-      throw new Error('Unexpected response structure');
+    if (!messages || !Array.isArray(messages)) {
+      return new Response(JSON.stringify({ error: 'Invalid input' }), { status: 400 });
     }
 
-    return new Response(JSON.stringify(data), { status: 200 });
+    const response = await generateResponseWithRAG(messages);
+
+    return new Response(JSON.stringify(response), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
-    console.error('🔴 Error handling request:', error.message);
-    return new Response(JSON.stringify({ error: error.message || 'Error handling request' }), { status: 500 });
+    console.error('Error in POST /api/bot:', error);
+    return new Response(JSON.stringify({ error: 'An internal error occurred' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
