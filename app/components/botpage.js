@@ -11,67 +11,62 @@ export default function ChatBot() {
   useEffect(() => {
     const initialSystemMessage = {
       role: 'system',
-      content: "Hello! I'm your academic assistant. You can ask me about professors from different colleges, including their ratings, departments, and difficulty levels. For example, you can ask me 'Who is the best science professor at Harvard?' or 'Tell me about Professor John Doe from MIT'. I'll do my best to provide accurate and up-to-date information about college professors and courses!"
-    }
-
+      content: "Hello! I'm your academic assistant. Ask me about professors, courses, or colleges. You can ask about specific professors, compare professors, or get a list of top professors at a university."
+    };
     setChatHistory([initialSystemMessage]);
   }, [])
 
   const handleUserInput = async () => {
     if (userInput.trim() === '') return;
-  
-    setIsLoading(true);
-  
-    let updatedChatHistory = [...chatHistory, { role: 'user', content: userInput }];
-    
-    setChatHistory(updatedChatHistory);
-  
-    try {
-      const response = await fetch('/api/bot', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ messages: updatedChatHistory }),  
-      })
-  
-      const data = await response.json();
 
-      if (response.ok) {
-        if (data.choices && data.choices[0] && data.choices[0].message) {
-          setChatHistory((prevChat) => [
-            ...prevChat,
-            { role: 'assistant', content: data.choices[0].message.content },
-          ])
-        } else {
-          console.error('Unexpected API response structure:', data, 'Response:', response);
-          setChatHistory((prevChat) => [
-            ...prevChat,
-            { role: 'assistant', content: 'Error: Unexpected response from the API' },
-          ])
+    setIsLoading(true);
+    let updatedChatHistory = [...chatHistory, { role: 'user', content: userInput }];
+    setChatHistory(updatedChatHistory);
+
+    try {
+        const response = await fetch('/api/bot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: updatedChatHistory }),
+        })
+
+        const textData = await response.text();
+        let data;
+
+        try {
+            data = JSON.parse(textData); // Attempt to parse the response as JSON
+        } catch (error) {
+            throw new Error(`Invalid JSON response: ${textData}`);
         }
-      } else {
-        console.error('API error:', data.error, 'Response:', response);
-        setChatHistory((prevChat) => [
-          ...prevChat,
-          { role: 'assistant', content: `Error: ${data.error}` },
-        ]);
-      }
+
+        if (response.ok) {
+            const content = data.choices[0].message.content;
+            setChatHistory(prev => [
+                ...prev,
+                { role: 'assistant', content: content }
+            ]);
+
+            // If the bot asks for more information, create a UI for user to input details
+            if (content.includes('I couldn\'t find information')) {
+                // Prompt user to provide details here
+                setUserInput('{"name": "Professor X", "school": "University Y", "department": "Department Z", "rating": 4.5, "difficulty": 3.5, "num_ratings": 50, "would_take_again": 80}');
+            }
+        } else {
+            throw new Error(data.error);
+        }
     } catch (error) {
-      console.error('Error querying LLaMA API:', error);
-      setChatHistory((prevChat) => [
-        ...prevChat,
-        { role: 'assistant', content: 'Error querying LLaMA API' },
-      ]);
+        setChatHistory(prev => [
+            ...prev,
+            { role: 'assistant', content: `Error: ${error.message}` }
+        ]);
     } finally {
-      setUserInput('');
-      setIsLoading(false);
+        setUserInput('');
+        setIsLoading(false);
     }
-  }
+}
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault();
       handleUserInput();
     }
   }
