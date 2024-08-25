@@ -68,5 +68,15 @@
         "difficulty": 3.1,
         "num_ratings": 95,
         "would_take_again": 93
+    },
+    {
+        "id": "professor_8",
+        "name": "Jason Block",
+        "department": "Mathematics",
+        "school": "Brooklyn College",
+        "rating": 4.9,
+        "difficulty": 2.1,
+        "num_ratings": 95,
+        "would_take_again": 95
     }
   ]
