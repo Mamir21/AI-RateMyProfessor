@@ -11,7 +11,7 @@ export async function GET(req) {
       return new Response(JSON.stringify({ error: 'Missing required query parameters: schoolName, professorName' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
-      });
+      })
     }
 
     // Update the path to the correct location of fetchProfessorData.py
@@ -26,11 +26,11 @@ export async function GET(req) {
 
     pythonProcess.stdout.on('data', (data) => {
       dataString += data.toString();
-    });
+    })
 
     pythonProcess.stderr.on('data', (data) => {
       errorString += data.toString();
-    });
+    })
 
     const exitPromise = new Promise((resolve, reject) => {
       pythonProcess.on('close', (code) => {
@@ -39,8 +39,8 @@ export async function GET(req) {
           return reject(new Error(`Python script error: ${errorString || `Exited with code ${code}`}`));
         }
         resolve(dataString);
-      });
-    });
+      })
+    })
 
     const result = await exitPromise;
 
@@ -49,19 +49,19 @@ export async function GET(req) {
       return new Response(JSON.stringify(jsonResponse), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
-      });
+      })
     } catch (error) {
       console.error('🔴 Failed to parse JSON:', error, result);
       return new Response(JSON.stringify({ error: 'Failed to parse JSON from Python script' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
-      });
+      })
     }
   } catch (error) {
     console.error('🔴 Error executing Python script:', error);
     return new Response(JSON.stringify({ error: 'Error fetching professor data' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
-    });
+    })
   }
 }

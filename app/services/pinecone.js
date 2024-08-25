@@ -4,7 +4,7 @@ import axios from 'axios';
 // Initialize Pinecone client using API key and index name from environment variables
 const pineconeClient = new Pinecone({
   apiKey: process.env.NEXT_PUBLIC_PINECONE_API_KEY,
-});
+})
 
 const index = pineconeClient.index(process.env.NEXT_PUBLIC_PINECONE_INDEX_NAME);
 
@@ -29,7 +29,7 @@ export const storeProfessorData = async (professorData, embedding) => {
             },
           }
         ]
-      };
+      }
   
       console.log('Upsert Request:', JSON.stringify(upsertRequest, null, 2));
       console.log('Type of professorData:', typeof professorData);
@@ -44,10 +44,7 @@ export const storeProfessorData = async (professorData, embedding) => {
       console.error('🔴 Error storing professor data in Pinecone:', error.message);
       throw new Error('Failed to store professor data');
     }
-  };
-  
-  
-
+  }
 
 // Function to query professor data from Pinecone, falling back to an external API if not found
 export const queryProfessorData = async (query) => {
@@ -62,7 +59,7 @@ export const queryProfessorData = async (query) => {
         name: { $eq: query.professorName }, // Filter by professor name
         school: { $eq: query.schoolName }  // Filter by school name
       }
-    });
+    })
 
     console.log('Query response from Pinecone:', pineconeResponse);
 
@@ -85,7 +82,7 @@ export const queryProfessorData = async (query) => {
           name: { $eq: query.professorName }, // Filter by professor name
           school: { $eq: query.schoolName }  // Filter by school name
         }
-      });
+      })
 
       // Step 5: If the data is now found, return the metadata
       if (pineconeResponse.matches && pineconeResponse.matches.length > 0) {
@@ -100,7 +97,7 @@ export const queryProfessorData = async (query) => {
     console.error('🔴 Error querying professor data from Pinecone:', error.message);
     throw error;
   }
-};
+}
 
 // Function to fetch professor data from an external API and store it in Pinecone
 const fetchAndStoreProfessorData = async (query) => {
@@ -115,7 +112,7 @@ const fetchAndStoreProfessorData = async (query) => {
         schoolName: query.schoolName,
         professorName: query.professorName,
       },
-    });
+    })
 
     console.log('API Response:', response.data);
 
@@ -138,4 +135,4 @@ const fetchAndStoreProfessorData = async (query) => {
     console.error('🔴 Error fetching professor data from external API:', error.message);
     throw error;
   }
-};
+}

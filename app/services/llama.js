@@ -29,7 +29,7 @@ export const generateResponseWithRAG = async (messages) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GROQ_API_KEY}`,
       },
-    });
+    })
 
     // Log the entire response object
     console.log('Full API Response:', parsingResponse);
@@ -67,7 +67,7 @@ export const generateResponseWithRAG = async (messages) => {
             content: 'Please provide both the professor name and the school name.',
           }
         }]
-      };
+      }
     }
 
     // Step 3: Query Pinecone or fetch from an external API if necessary
@@ -78,12 +78,12 @@ export const generateResponseWithRAG = async (messages) => {
       enhancedMessages.push({
         role: 'system',
         content: `Context: Professor ${pineconeContext.name} from ${pineconeContext.school} in the ${pineconeContext.department} department. Rating: ${pineconeContext.rating}, Difficulty: ${pineconeContext.difficulty}, Would take again: ${pineconeContext.would_take_again}%`,
-      });
+      })
     } else {
       enhancedMessages.push({
         role: 'system',
         content: `No specific information found for Professor ${professor} from ${university}. Please provide a general response based on the query.`,
-      });
+      })
     }
 
     console.log('Enhanced Messages:', enhancedMessages);
@@ -99,7 +99,7 @@ export const generateResponseWithRAG = async (messages) => {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GROQ_API_KEY}`,
-    }});
+    }})
 
     // Log the entire response object to debug
     console.log('Full API Response:', response);
@@ -115,7 +115,7 @@ export const generateResponseWithRAG = async (messages) => {
             content: response.data.choices[0].message.content
           }
         }]
-      };
+      }
     } else {
       throw new Error('Unexpected response structure from LLaMA API');
     }
@@ -127,6 +127,6 @@ export const generateResponseWithRAG = async (messages) => {
           content: `Error: ${error.message}`
         }
       }]
-    };
+    }
   }
-};
+}
