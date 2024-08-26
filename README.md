@@ -1,8 +1,10 @@
 # Sage AI
 
+Sage AI is an intelligent bot designed to help students make informed decisions about their courses and instructors. By simply searching for a professor's name, students can access a wealth of feedback and reviews from past and current students. The bot aggregates data from various sources, providing a comprehensive overview of a professor's teaching style, course difficulty, grading fairness, and overall effectiveness.
 
 ## Demo
 
+![image](https://github.com/user-attachments/assets/9f5a0e59-7ecb-4405-a23f-34133de49b69)
 
 
 ## Features
